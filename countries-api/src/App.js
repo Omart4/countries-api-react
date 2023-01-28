@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { useEffect , useState } from "react";
 
 function App() {
+  const [countries,setCountries] = useState([])
+  const [searchC,setSearchC] = useState([])
+  useEffect(()=>{
+      fetch('https://restcountries.com/v3.1/all')
+        .then((res)=>{
+          return res.json()
+        })
+        .then((data)=>{
+          let sortedData = data.sort((a,b)=>a.name.common>b.name.common?1:-1) 
+          setSearchC(sortedData)
+          setCountries(sortedData)
+        })
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Navbar countries={countries} setSearchC={setSearchC}/>
+      <Home countries={countries} searchC={searchC}/>
     </div>
   );
 }
