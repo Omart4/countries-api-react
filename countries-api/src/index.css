@@ -149,3 +149,30 @@ img{
       transform: rotate(360deg);
   }
 }
+
+.cWindow{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10vw;
+  flex-wrap: wrap;
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.details{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 250px;
+  width: 100%;
+}
+.details p{
+  margin: 2vh 1vh 2vh 0 ;
+}
+.classi{
+  font-weight: bold;
+}

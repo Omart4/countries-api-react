@@ -1,13 +1,18 @@
-const CountryCard = ({searchC}) => {
+const CountryCard = ({searchC,isOpen,setIsOpen,setTargetCountry}) => {
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    const togglePop = (event)=>{
+        let target = event.currentTarget;
+        setIsOpen(!isOpen)
+        console.log(target.id)
+        setTargetCountry(searchC.filter(i=>i.name.common === target.id))
     }
     
     return (
         <div className="c-list">
-            <div id="loading"></div>
             {searchC.map((country)=>(
-            <div className="country" key={country.name.common}>
+            <div className="country" key={country.name.common} id={country.name.common} onClick={(e)=>{togglePop(e)}}>
                 <img src={country.flags.png}/>
                 <div className="c-details">
                     <h2>{country.name.common}</h2>
