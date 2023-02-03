@@ -1,30 +1,26 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
-import { useEffect , useState } from "react";
-import CountryPopup from "./Country-popup";
+import CountryPopup, { countryDetailsLoader } from "./Country-popup";
+import useFetch from "./useFetch";
+import {BrowserRouter as Router,createBrowserRouter,createRoutesFromElements,Route,RouterProvider,Routes} from 'react-router-dom'
 
 function App() {
-  const [countries,setCountries] = useState([])
-  const [searchC,setSearchC] = useState([])
-  const [isOpen,setIsOpen] = useState(false)
-  const [targetCountry,setTargetCountry] = useState([])
-  useEffect(()=>{
-      fetch('https://restcountries.com/v3.1/all')
-        .then((res)=>{
-          return res.json()
-        })
-        .then((data)=>{
-          let sortedData = data.sort((a,b)=>a.name.common>b.name.common?1:-1) 
-          setSearchC(sortedData)
-          setCountries(sortedData)
-        })
-  },[])
+  const {countries ,searchC,setSearchC,isPending,error} = useFetch('https://restcountries.com/v3.1/all')
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route path="/" element={
+              <>
+                <Navbar countries={countries} setSearchC={setSearchC}/>
+                <Home searchC={searchC}/>
+              </>
+            }></Route>
+            <Route path="/countries/:name" element={<CountryPopup/>} loader={countryDetailsLoader}></Route>
+      </Route>
+    )
+  )
   return (
-    <div className="app">
-      <Navbar countries={countries} setSearchC={setSearchC}/>
-      <Home countries={countries} searchC={searchC} isOpen={isOpen} setIsOpen={setIsOpen} setTargetCountry={setTargetCountry}/>
-      {isOpen&&<CountryPopup targetCountry={targetCountry}/>}
-    </div>
+    <RouterProvider router={router}/>
   );
 }
 

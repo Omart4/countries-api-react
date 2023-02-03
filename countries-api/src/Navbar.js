@@ -1,6 +1,7 @@
 import { useEffect , useState } from "react";
+import useFetch from "./useFetch";
 
-const Navbar = ({countries ,setSearchC}) => {
+const Navbar = ({countries,setSearchC}) => {
     //Search Function
     //This function uses the original data from countries and then filters it to another variable called searchC using the setSearchC function 
     // which renders the data in Home.js 

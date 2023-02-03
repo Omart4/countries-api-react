@@ -1,9 +1,10 @@
 import CountryCard from "./Country-card";
+import useFetch from "./useFetch";
 
-const Home = ({searchC,isOpen,setIsOpen,setTargetCountry}) => {
+const Home = ({countries,searchC}) => {
     return ( 
         <div className="home">
-            <CountryCard searchC={searchC} setIsOpen={setIsOpen} isOpen={isOpen} setTargetCountry={setTargetCountry}/>
+            <CountryCard searchC={searchC}/>
         </div>
     );
 }

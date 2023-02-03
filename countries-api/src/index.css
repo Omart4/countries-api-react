@@ -48,6 +48,8 @@ body{
   overflow: hidden;
   cursor: pointer;
   background-color: var(--lightBack);
+  color: black;
+  text-decoration: underline;
 }
 img{
   aspect-ratio: 3/2;
@@ -158,6 +160,13 @@ img{
   gap: 10vw;
   flex-wrap: wrap;
 }
+.cWindow img{
+  width: var(--imageWidth);
+  height: var(--imageHeight);
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
 .data{
   display: flex;
   flex-direction: column;
@@ -175,4 +184,11 @@ img{
 }
 .classi{
   font-weight: bold;
+}
+.images{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 600px;
 }
